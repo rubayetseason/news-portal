@@ -1,9 +1,15 @@
 const newsbar = async () => {
-    const url = 'https://openapi.programming-hero.com/api/news/categories';
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNewsbar(data.data.news_category);
+    try {
+        const url = 'https://openapi.programming-hero.com/api/news/categories';
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNewsbar(data.data.news_category);
+    }
+    catch {
+        console.log('error');
+    }
 }
+
 
 const displayNewsbar = (news) => {
     const newsbarContainer = document.getElementById('newsbar-container');
@@ -19,15 +25,18 @@ const displayNewsbar = (news) => {
 
 
 const newsfeed = async (id) => {
-    // console.log(id); 01 02 03 04
-    console.log(id);
-    const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNews(data);
+    try {
+        const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNews(data);
+    }
+    catch {
+        console.log('error');
+    }
 }
 
-newsfeed('01');
+newsfeed('04');
 
 const displayNews = (news) => {
     const newsContainer = document.getElementById('newsfeed-container');
@@ -88,10 +97,15 @@ const displayNews = (news) => {
 }
 
 const openModal = (id) => {
-    const url = ` https://openapi.programming-hero.com/api/news/${id}`;
-    fetch(url)
-        .then(response => response.json())
-        .then(data => modalDetail(data.data[0]))
+    try {
+        const url = ` https://openapi.programming-hero.com/api/news/${id}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => modalDetail(data.data[0]))
+    }
+    catch {
+        console.log('error');
+    }
 }
 
 const modalDetail = detail => {
@@ -122,6 +136,7 @@ const toggleSpinner = isLoading => {
 
 newsbar();
 
+// blog page link here 
 document.getElementById('blog-id').addEventListener('click', function () {
     window.location.href = 'blog.html';
 })
