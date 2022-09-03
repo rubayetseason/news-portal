@@ -12,7 +12,7 @@ const displayNewsbar = (news) => {
         newsDiv.innerHTML = `
         <button class="btn btn-outline-danger border-1 rounded-0 py-1 px-2 m-1" onclick="newsfeed('${singleNews.category_id}');  toggleSpinner(true);">${singleNews.category_name}</button>
         `;
-        
+
         newsbarContainer.appendChild(newsDiv);
     });
 }
@@ -33,12 +33,20 @@ const displayNews = (news) => {
     const newsNumber = document.getElementById('items-found');
     newsNumber.innerText = `${news.data.length} items found for this category`;
     // items found here
-
     // data sorting here 
     news.data.sort((a, b) => {
         return b.total_view - a.total_view;
     })
     // data sorting here 
+    // console.log(news.data.length);
+    const visible = document.getElementById('results-found');
+    if (news.data.length === 0) {
+        visible.classList.remove('d-none');
+    }
+    else {
+        visible.classList.add('d-none')
+    }
+
 
     news.data.forEach(singleNews => {
         const newsDiv = document.createElement('div');
@@ -100,10 +108,10 @@ const modalDetail = detail => {
 //THE LOADER PART HERE
 const toggleSpinner = isLoading => {
     const loadingSection = document.getElementById('loader');
-    if(isLoading){
+    if (isLoading) {
         loadingSection.classList.remove('d-none');
     }
-    else{
+    else {
         loadingSection.classList.add('d-none');
     }
 }
