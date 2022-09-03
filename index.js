@@ -122,7 +122,7 @@ const modalDetail = detail => {
 
 
 
-//THE LOADER PART HERE
+//loader here
 const toggleSpinner = isLoading => {
     const loadingSection = document.getElementById('loader');
     if (isLoading) {
