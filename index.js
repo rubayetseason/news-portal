@@ -19,7 +19,6 @@ const displayNewsbar = (news) => {
 const newsfeed = async (id) => {
     // console.log(id); 01 02 03 04
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-    console.log(url);
     const res = await fetch(url);
     const data = await res.json();
     displayNews(data);
@@ -28,20 +27,19 @@ const newsfeed = async (id) => {
 const displayNews = (news) => {
     const newsContainer = document.getElementById('newsfeed-container');
     newsContainer.innerHTML = "";
-// items found here 
-const newsNumber = document.getElementById('items-found');
-newsNumber.innerText = `${news.data.length} items found for this category`;
-// items found here
+    // items found here 
+    const newsNumber = document.getElementById('items-found');
+    newsNumber.innerText = `${news.data.length} items found for this category`;
+    // items found here
 
-// data sorting here 
-news.data.sort((a,b) =>{
-    return b.total_view - a.total_view;
-} )
-// data sorting here 
+    // data sorting here 
+    news.data.sort((a, b) => {
+        return b.total_view - a.total_view;
+    })
+    // data sorting here 
 
 
     news.data.forEach(singleNews => {
-        console.log(singleNews);
         const newsDiv = document.createElement('div');
         newsDiv.innerHTML = `
         <div class="card mb-3" style="width: 100%;">
@@ -64,7 +62,7 @@ news.data.sort((a,b) =>{
                                 <p>Views: ${singleNews.total_view}</p>
                                 </div>
                                 <div style="width: 30%;">
-                                <button class="btn btn-danger">More</button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#infoModal" onclick="openModal('${singleNews._id}')">More</button>
                                 </div>
                                 </div>
                             </div>
@@ -76,6 +74,16 @@ news.data.sort((a,b) =>{
     });
 }
 
+const openModal = (id) => {
+    const url = ` https://openapi.programming-hero.com/api/news/${id}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => modalDetail(data))
+}
+
+const modalDetail = (detail) => {
+    console.log(detail);
+}
 
 newsbar();
 
@@ -83,3 +91,5 @@ newsbar();
 document.getElementById('blog-id').addEventListener('click', function () {
     window.location.href = 'blog.html';
 })
+
+
