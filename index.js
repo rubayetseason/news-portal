@@ -20,11 +20,14 @@ const displayNewsbar = (news) => {
 
 const newsfeed = async (id) => {
     // console.log(id); 01 02 03 04
+    console.log(id);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
     const res = await fetch(url);
     const data = await res.json();
     displayNews(data);
 }
+
+newsfeed('01');
 
 const displayNews = (news) => {
     const newsContainer = document.getElementById('newsfeed-container');
@@ -118,7 +121,6 @@ const toggleSpinner = isLoading => {
 
 
 newsbar();
-
 
 document.getElementById('blog-id').addEventListener('click', function () {
     window.location.href = 'blog.html';
