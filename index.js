@@ -78,11 +78,18 @@ const openModal = (id) => {
     const url = ` https://openapi.programming-hero.com/api/news/${id}`;
     fetch(url)
         .then(response => response.json())
-        .then(data => modalDetail(data))
+        .then(data => modalDetail(data.data[0]))
 }
 
-const modalDetail = (detail) => {
-    console.log(detail);
+const modalDetail = detail => {
+    const modalTitle = document.getElementById('infoModalLabel');
+    modalTitle.innerText = `${detail.title}`;
+    const modalInfoDetails = document.getElementById('modal-detail');
+    modalInfoDetails.innerHTML = `
+    <p>${detail.details}</p>
+    <h5>Author: ${detail.author.name ? detail.author.name : "No author found"}</h5>
+    <h5>Date: ${detail.author.published_date ? detail.author.published_date : "Date not found"}</h5>
+    `;
 }
 
 newsbar();
