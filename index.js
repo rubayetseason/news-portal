@@ -33,6 +33,13 @@ const newsNumber = document.getElementById('items-found');
 newsNumber.innerText = `${news.data.length} items found for this category`;
 // items found here
 
+// data sorting here 
+news.data.sort((a,b) =>{
+    return b.total_view - a.total_view;
+} )
+// data sorting here 
+
+
     news.data.forEach(singleNews => {
         console.log(singleNews);
         const newsDiv = document.createElement('div');
