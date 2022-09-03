@@ -10,11 +10,13 @@ const displayNewsbar = (news) => {
     news.forEach(singleNews => {
         const newsDiv = document.createElement('div');
         newsDiv.innerHTML = `
-        <button class="btn btn-outline-danger border-1 rounded-0 py-1 px-2 m-1" onclick="newsfeed('${singleNews.category_id}')">${singleNews.category_name}</button>
+        <button class="btn btn-outline-danger border-1 rounded-0 py-1 px-2 m-1" onclick="newsfeed('${singleNews.category_id}');  toggleSpinner(true);">${singleNews.category_name}</button>
         `;
+        
         newsbarContainer.appendChild(newsDiv);
     });
 }
+
 
 const newsfeed = async (id) => {
     // console.log(id); 01 02 03 04
@@ -37,7 +39,6 @@ const displayNews = (news) => {
         return b.total_view - a.total_view;
     })
     // data sorting here 
-
 
     news.data.forEach(singleNews => {
         const newsDiv = document.createElement('div');
@@ -72,6 +73,7 @@ const displayNews = (news) => {
         `;
         newsContainer.appendChild(newsDiv);
     });
+    toggleSpinner(false);
 }
 
 const openModal = (id) => {
@@ -91,6 +93,21 @@ const modalDetail = detail => {
     <h5>Date: ${detail.author.published_date ? detail.author.published_date : "Date not found"}</h5>
     `;
 }
+
+
+
+
+//THE LOADER PART HERE
+const toggleSpinner = isLoading => {
+    const loadingSection = document.getElementById('loader');
+    if(isLoading){
+        loadingSection.classList.remove('d-none');
+    }
+    else{
+        loadingSection.classList.add('d-none');
+    }
+}
+
 
 newsbar();
 
