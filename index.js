@@ -75,7 +75,7 @@ const displayNews = (news) => {
                                 <div id="main-div" class="d-flex align-items-center">
 
                                 <div class="d-flex flex-column" style="width: 30%;">
-                                <img src="${singleNews.author.img}" style="width: 15%;" class="rounded-5">
+                                <img src="${singleNews.author.img}" style="width: 20%;" class="rounded-5">
                                 <p class="fw-semibold">${singleNews.author.name ? singleNews.author.name : "No author found"}</p>
                                 </div>
 
