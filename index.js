@@ -133,12 +133,9 @@ const toggleSpinner = isLoading => {
     }
 }
 
-
 newsbar();
 
 // blog page link here 
 document.getElementById('blog-id').addEventListener('click', function () {
     window.location.href = 'blog.html';
 })
-
-
